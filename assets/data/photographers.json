@@ -1,0 +1,76 @@
+[
+    {
+        "id": 1,
+        "img": "person_1.jpg",
+        "name": "Miley",
+        "desc": "An expert <i>portrait</i> photographer",
+        "paragraphs": [
+            "Miley has been working as a portrait photographer for five years and has developed a great relationship with her clients.",
+            "With her expertise you will look your best on all the images taken with her newest equipment and high expertise."
+        ],
+        "images": [
+            "miley_img_1.gif",
+            "miley_img_2.gif",
+            "miley_img_3.gif",
+            "miley_img_4.gif",
+            "miley_img_5.gif",
+            "miley_img_6.gif"
+        ],
+        "price": 15
+    },
+    {
+        "id": 2,
+        "img": "person_2.jpg",
+        "name": "Joe",
+        "desc": "An expert <i>Landscape</i> photographer",
+        "paragraphs": [
+            "Joe is an experienced landscape photographer working with top travel magazines and travel agencies.",
+            "His skills make him one of the most desirable landscape photographers in Europe."
+        ],
+        "images": [
+            "joe_img_1.gif",
+            "joe_img_2.gif",
+            "joe_img_3.gif",
+            "joe_img_4.gif",
+            "joe_img_5.gif",
+            "joe_img_6.gif"
+        ],
+        "price": 17
+    },
+    {
+        "id": 3,
+        "img": "person_3.jpg",
+        "name": "Julius",
+        "desc": "An expert <i>Event</i> photographer",
+        "paragraphs": [
+            "Julius is an Event photographer with more than 8 years of experienc in this field of photography.",
+            "He is successfull at capturing best moments of peoples lives on unforgetable events."
+        ],
+        "images": [
+            "julius_img_1.gif",
+            "julius_img_2.gif",
+            "julius_img_3.gif",
+            "julius_img_4.gif",
+            "julius_img_5.gif",
+            "julius_img_6.gif"
+        ],
+        "price": 13
+    },
+    {
+        "id": 4,
+        "img": "person_4.jpg",
+        "name": "Marie",
+        "desc": "An expert <i>Ambient</i> photographer",
+        "paragraphs": [
+            "Marie has developed a passion for ambient photography in her 6 years of work experience in the field.",
+            "She is skillfull at capturing all kinds of environments and situations very realisticaly, making her one of the best."
+        ],
+        "images": [
+            "marie_img_1.gif",
+            "marie_img_2.gif",
+            "marie_img_3.gif",
+            "marie_img_4.gif"
+        ],
+        "price": 14
+    }
+]

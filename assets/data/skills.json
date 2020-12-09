@@ -1,0 +1,18 @@
+[
+    {
+        "selected": true,
+        "skills": ["JavaScript", "jQuery", "PHP"]
+    },
+    {
+        "selected": false,
+        "skills": ["HTML", "CSS", "Bootstrap"]
+    },
+    {
+        "selected": false,
+        "skills": ["C#", "MS SQL Server", "AJAX"]
+    },
+    {
+        "selected": false,
+        "skills": ["SQL", "JSON", "PhpMyAdmin"]
+    }
+]

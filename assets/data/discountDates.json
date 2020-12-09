@@ -1,0 +1,20 @@
+[
+    {
+        "name": "Holiday Season Discount!",
+        "from": "12/01/2020",
+        "to": "02/01/2021",
+        "discount": 20
+    },
+    {
+        "name": "Summer Discount!",
+        "from": "07/01/2021",
+        "to": "07/30/2021",
+        "discount": 10
+    },
+    {
+        "name": "March Discount!",
+        "from": "03/25/2021",
+        "to": "03/10/2021",
+        "discount": 5
+    }
+]
