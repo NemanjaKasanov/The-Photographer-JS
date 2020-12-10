@@ -7,7 +7,7 @@
         <title>The Photographer</title>
         <link rel="shortcut icon" href="assets/img/icon.ico"/>
         <meta name="description" content="The Photographer is a company that helps you provide best services in the field of photography at one place."/>
-        <meta name="keywords" content=""/>
+        <meta name="keywords" content="Contact,Form,appointment,Photographer,photographers,form"/>
 
         <link rel="stylesheet" href="assets/fontawesome-5.5/css/all.min.css"/>
         <link rel="stylesheet" href="assets/slick/slick.css"/>
@@ -74,38 +74,59 @@
                         <div class="row">
 
                             <div class="col-12">
-                                <p class="h5 text-center mb-4">Fill in the form to book a session with a photographer:</p>
+                                <p class="h5 text-center">Fill in the form to book a session with a photographer:</p>
+                                <p class="text-center mb-4">All fields are required. We need basic personal information, contact information, which photographer would you prefer, address where the session would take place and an EXPECTED DATE for the session.</p>
                             </div>
 
                             <div class="col-lg-6 col-sm-12 mb-3">
                                 <input type="text" id="firstName" class="form-control" placeholder="First name"/>
-                                <p id="alertFirstName" class="alertSignal text-danger">First Name in invalid format.</p>
+                                <p id="alertFirstName" class="alertSignal text-danger">First Name in invalid format. Valid example: John, Marie Anne</p>
                             </div>
 
                             <div class="col-lg-6 col-sm-12 mb-3">
                                 <input type="text" id="lastName" class="form-control" placeholder="Last name"/>
-                                <p id="alertLastName" class="alertSignal text-danger">Last Name in invalid format.</p>
+                                <p id="alertLastName" class="alertSignal text-danger">Last Name in invalid format. Valid example: Doe, Goldberg-Doe</p>
                             </div>
 
                             <div class="col-12 mb-3">
                                 <input type="text" id="email" class="form-control" placeholder="Contact Email"/>
-                                <p id="alertEmail" class="alertSignal text-danger">Email in invalid format.</p>
+                                <p id="alertEmail" class="alertSignal text-danger">Email in invalid format. Valid example: My_email@gmail.com</p>
                             </div>
 
                             <div class="col-12 mb-3">
                                 <input type="text" id="phone" class="form-control" placeholder="Contact Phone Number"/>
-                                <p id="alertPhone" class="alertSignal text-danger">Phone number in invalid format.</p>
+                                <p id="alertPhone" class="alertSignal text-danger">Phone number in invalid format. Valid example: +381 641234567</p>
                             </div>
 
                             <div class="col-12 mb-3">
                                 <input type="text" id="address" class="form-control" placeholder="Address for the Session"/>
-                                <p id="alertAddress" class="alertSignal text-danger">Address in invalid format.</p>
+                                <p id="alertAddress" class="alertSignal text-danger">Address in invalid format. Valid example: Knez Mihajlova 24</p>
                             </div>
 
-                            <div class="col-12 text-center">
-                                <p class="h2 m-4">
-                                    Price per hour: <span id="price_display">0</span>&euro;
-                                </p>
+                            <div class="col-12 d-flex flex-wrap">
+                                <div class="col-lg-6 col-sm-12 d-flex justify-content-center">
+                                    <div class="col-sm-10 d-flex align-items-center">
+                                        <div class="col-12">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="tip" id="no_tip tip" class="tip" value="0" checked>
+                                                <label class="form-check-label" for="no_tip">
+                                                Don't leave a TIP
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="tip" id="yes_tip tip" class="tip" value="1">
+                                                <label class="form-check-label" for="yes_tip">
+                                                Leave a 2&euro; TIP
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-sm-12 text-center">
+                                    <p class="h2 m-4">
+                                        Price per hour: <span id="price_display"></span>&euro;
+                                    </p>
+                                </div>
                             </div>
 
                             <div class="col-12 my-1 mb-3 d-flex flex-wrap">
@@ -121,14 +142,13 @@
                                 </div>
                             </div>
 
-
-
                         </div>
                     </div>
                 </div>
 
                 <div class="col-12 text-center">
-                    <button type="submit" class="btn btn-primary m-5" name="submit" id="submit">Submit</button>
+                    <button type="submit" class="btn btn-primary mt-5 mb-3" name="submit" id="submit">Submit</button>
+                    <p id="alertSubmit" class="alertSignal text-danger">Please make sure that all required data is inserted in the valid form.</p>
                 </div>
 
             </form>

@@ -1,4 +1,7 @@
 // JavaScript
+
+var validityCheckArray = [false, false, false, false, false, false, false];
+
 window.onload = function(){
     createMenu();
     createFooter();
@@ -7,13 +10,68 @@ window.onload = function(){
     createDiscountData();
     createDropDownForPhotographers();
 
+    initializeLocalStorage();
+    displayPrice();
+
     document.getElementById("submit").addEventListener("click", submitFormData);
 
-    // document.getElementById("alertPhotographer").style.display = 'block';
+    let name = document.getElementById("firstName");
+    name.addEventListener("blur", function(){checkData(name, /^[a-zA-ZšđčćžŠĐČĆŽ]+([ -]?[a-zA-ZšđčćžŠĐČĆŽ]+)*$/, document.getElementById('alertFirstName'), 0)});
+
+    let lastName = document.getElementById("lastName");
+    lastName.addEventListener("blur", function(){checkData(lastName, /^[a-zA-ZšđčćžŠĐČĆŽ]+([ -]?[a-zA-ZšđčćžŠĐČĆŽ]+)*$/, document.getElementById('alertLastName'), 1)});
+
+    let email = document.getElementById("email");
+    email.addEventListener("blur", function(){checkData(email, /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, document.getElementById('alertEmail'), 2)});
+
+    let phone = document.getElementById("phone");
+    phone.addEventListener("blur", function(){checkData(phone, /^(\+381 )[\d]{8,12}$/, document.getElementById('alertPhone'), 3)});
+
+    let address = document.getElementById("address");
+    address.addEventListener("blur", function(){checkData(address, /^[A-ZŠĐČĆŽ][a-zšđčćž]{1,50}[ -]?([A-ZŠĐČĆŽ][a-zšđčćž]{1,50}\s)*[0-9]{1,4}$/, document.getElementById('alertAddress'), 4)});
+
+    document.getElementById("photographer").addEventListener("change", function(){
+        let value = this.value;
+
+        if(value == 0){
+            document.getElementById("alertPhotographer").style.display = 'block';
+            this.style.border = "1px solid red";
+
+            validityCheckArray[5] = false;
+        }
+        else{
+            document.getElementById("alertPhotographer").style.display = 'none';
+            this.style.border = "1px solid blue";
+
+            validityCheckArray[5] = true;
+        }
+        
+        localStorage.setItem("photographer", value);
+        calculatePrice();
+    });
+
+    document.getElementById("firstDate").addEventListener("blur", function(){
+        let value = this.value;
+
+        if(value){
+            document.getElementById("alertDate").style.display = 'none';
+            this.style.border = "1px solid blue";
+
+            validityCheckArray[6] = true;
+        } 
+        else{
+            document.getElementById("alertDate").style.display = 'block';
+            this.style.border = "1px solid red";
+
+            validityCheckArray[6] = false;
+        } 
+    });
+
 
 }
 
 // jQuery
+
 $(document).ready(function(){
 
     // Skills Slider
@@ -34,10 +92,10 @@ $(document).ready(function(){
         next = selected.next(".skill").length ? selected.next(".skill") : first;
 
         selected.removeClass("selected");
-        selected.addClass("not_sel").slideUp(200);
+        selected.addClass("not_sel").slideUp(70);
 
         next.removeClass("not_sel");
-        next.addClass("selected").slideDown(200);
+        next.addClass("selected").slideDown(70);
     });
 
     $('#left').click(function(e){
@@ -49,10 +107,10 @@ $(document).ready(function(){
         next = selected.prev(".skill").length ? selected.prev(".skill") : last;
 
         selected.removeClass("selected");
-        selected.addClass("not_sel").slideUp(200);
+        selected.addClass("not_sel").slideUp(70);
 
         next.removeClass("not_sel");
-        next.addClass("selected").slideDown(200);
+        next.addClass("selected").slideDown(70);
     });
 
     // Timer for Skills Slider
@@ -66,10 +124,10 @@ $(document).ready(function(){
         next = selected.next('.skill').length ? selected.next('.skill') : first;
 
         selected.removeClass("selected");
-        selected.addClass("not_sel").slideUp(200);
+        selected.addClass("not_sel").slideUp(70);
 
         next.removeClass("not_sel");
-        next.addClass("selected").slideDown(200);
+        next.addClass("selected").slideDown(70);
 
         tid = setTimeout(timer, time);
     }
@@ -79,17 +137,110 @@ $(document).ready(function(){
 
     $(".alertSignal").hide();
 
+    // Tip Event 
+    $('input[name="tip"]').click(function(){
+        let value = $(this).val();
+
+        if(value == 1){
+            localStorage.setItem("tip", 2);
+            calculatePrice();
+        }
+        else{
+            localStorage.setItem("tip", 0);
+            calculatePrice();
+        }
+    });
+
+    let priceToSend = localStorage.getItem("price_to_send");
+    $("#price_end").html(priceToSend);
+    localStorage.setItem("price_to_send", 0);
 });
 
-// Validity Checks
+
+// Functions
 
 function submitFormData(e){
     e.preventDefault();
 
-    
+    if(!validityCheckArray.includes(false)){
+        location.href = 'thanks.html';
+    }
+    else{
+        document.getElementById("alertSubmit").style.display = 'block';
+
+        if(validityCheckArray[0] == false) document.getElementById("alertFirstName").style.display = 'block';
+        if(validityCheckArray[1] == false) document.getElementById("alertLastName").style.display = 'block';
+        if(validityCheckArray[2] == false) document.getElementById("alertEmail").style.display = 'block';
+        if(validityCheckArray[3] == false) document.getElementById("alertPhone").style.display = 'block';
+        if(validityCheckArray[4] == false) document.getElementById("alertAddress").style.display = 'block';
+        if(validityCheckArray[5] == false) document.getElementById("alertPhotographer").style.display = 'block';
+        if(validityCheckArray[6] == false) document.getElementById("alertDate").style.display = 'block';
+    }
 }
 
-// Functions
+function checkData(element, regex, alert, position_in_array){
+    const value = element.value;
+
+    if(regex.test(value)){
+        element.style.border = "1px solid blue";
+        alert.style.display = 'none';
+
+        validityCheckArray[position_in_array] = true;
+    }
+    else{
+        element.style.border = "1px solid red";
+        alert.style.display = 'block';
+        
+        validityCheckArray[position_in_array] = false;
+    }
+}
+
+function calculatePrice(){
+    let price = 0;
+
+    let id = localStorage.getItem("photographer");
+    let tip = localStorage.getItem("tip");
+    let discount = localStorage.getItem("discount");
+    let photographerPrice = 0;
+
+    if(id == 0){
+        localStorage.setItem("price", 0);
+        displayPrice();
+    }
+    else{
+        $.ajax({
+            url: "assets/data/photographers.json",
+            success: function(data){
+                data.forEach(el => {
+                        if(el.id == id){
+                            photographerPrice = el.price;
+                            if(discount != 0) discount = photographerPrice * discount / 100;
+                            price = photographerPrice - discount + parseInt(tip);
+                            localStorage.setItem("price", price);
+                            localStorage.setItem("price_to_send", price);
+                            displayPrice();
+                        }
+                });
+            },
+            error: function(err){
+                console.log(err);
+            }
+        });
+    }
+}
+
+function displayPrice(){
+    let price = localStorage.getItem("price");
+    document.getElementById("price_display").innerHTML = price;
+}
+
+function initializeLocalStorage(){
+    localStorage.setItem("price", 0);
+    localStorage.setItem("photographer", 0);
+    localStorage.setItem("discount", 0);
+    localStorage.setItem("tip", 0);
+}
+
 function createDropDownForPhotographers(){
     $.ajax({
         url: "assets/data/photographers.json",
@@ -114,6 +265,8 @@ function createDiscountData(){
         success: function(data){
             today = new Date();
 
+            localStorage.setItem("discount", 0);
+
             for(let el of data){
                 from = new Date(el.from);
                 to = new Date(el.to);
@@ -126,6 +279,8 @@ function createDiscountData(){
                             <p class="h1">-${el.discount}%</p>
                         </div>
                     `;
+
+                    localStorage.setItem("discount", el.discount);
                 }
             }
         },
