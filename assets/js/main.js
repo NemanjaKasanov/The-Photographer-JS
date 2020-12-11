@@ -66,8 +66,6 @@ window.onload = function(){
             validityCheckArray[6] = false;
         } 
     });
-
-
 }
 
 // jQuery
